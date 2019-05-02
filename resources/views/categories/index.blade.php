@@ -27,10 +27,47 @@
                             <td>
                                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">Edit</a>
                             </td>
+                            <td>
+                                <a href="" class="btn btn-danger btn-sm" data-toggle="modal" onclick="handleDelete({{ $category->id }})">Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
+            </table>
+
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="" method="POST" id="deleteCategoryForm">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        function handleDelete(id) {
+            var form = document.getElementById('deleteCategoryForm')
+            form.action = '/categories/' + id
+            $('#deleteModal').modal('show')
+        }
+    </script>
 @endsection
