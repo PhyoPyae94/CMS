@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Posts\CreatePostsRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Post;
@@ -92,7 +91,7 @@ class PostsController extends Controller
             //upload it
             $image = $request->image->store('posts');
             //delete old one
-            Storage::delete($post->image);
+            $post->deleteImage();
 
             $data['image'] = $image;
         }
@@ -116,7 +115,7 @@ class PostsController extends Controller
         $post = Post::withTrashed()->where('id', $id)->firstOrFail();
 
         if($post->trashed()) {
-            Storage::delete($post->image);
+            $post->deleteImage();
             $post->forceDelete();
         }
         else{
@@ -125,7 +124,7 @@ class PostsController extends Controller
 
         session()->flash('success', 'Post Deleted successfully');
 
-        return redirect(route('trashed-posts.index'));
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -138,5 +137,15 @@ class PostsController extends Controller
         $trashed = Post::onlyTrashed()->get();
 
         return view('posts.index')->with('posts', $trashed);
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->where('id', $id)->firstOrFail();
+        $post->restore();
+        
+        session()->flash('success', 'Post restore successfully');
+
+        return redirect()->back();
     }
 }
