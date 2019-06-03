@@ -16,6 +16,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+        // dd(Category::first()->posts()->where('published_at', now())->get());
         return view('categories.index')->with('categories', Category::all());
     }
 
