@@ -1,12 +1,12 @@
 @extends('layouts.blog')
 
 @section('title')
-  Sass Blog
+  Z-Reader
 @endsection
 
 @section('header')
     <!-- Header -->
-    <header class="header text-center text-white" style="background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);">
+    <header class="header text-center text-black" style="background-image: linear-gradient(-225deg, #d999f7 0%, #e3b8ff 48%, #b76aff 90%);">
       <div class="container">
 
         <div class="row">
@@ -33,7 +33,7 @@
             <div class="col-md-8 col-xl-9">
               <div class="row gap-y">
 
-                @foreach($posts as $post)
+                @forelse($posts as $post)
                 <div class="col-md-6">
                   <div class="card border hover-shadow-6 mb-6 d-block">
                     <a href="{{ route('blog.show', $post->id) }}">
@@ -53,17 +53,19 @@
                     </div>
                   </div>
                 </div>
-                @endforeach
+                @empty
+                  <p class="text-center">
+                    No result found <strong>{{ request()->query('search') }}</strong>
+                  </p>
+                @endforelse
 
-
-                
               </div>
 
-
-              <nav class="flexbox mt-30">
+              <!-- <nav class="flexbox mt-30">
                 <a class="btn btn-white disabled"><i class="ti-arrow-left fs-9 mr-4"></i> Newer</a>
                 <a class="btn btn-white" href="#">Older <i class="ti-arrow-right fs-9 ml-4"></i></a>
-              </nav>
+              </nav> -->
+              {{ $posts->appends(['search' => request()->query('search') ])->links() }}
             </div>
 
 
@@ -72,8 +74,8 @@
               <div class="sidebar px-4 py-md-0">
 
                 <h6 class="sidebar-title">Search</h6>
-                <form class="input-group" target="#" method="GET">
-                  <input type="text" class="form-control" name="s" placeholder="Search">
+                <form class="input-group" action="{{ route('welcome') }}" method="GET">
+                  <input type="text" class="form-control" name="search" placeholder="Search" value="{{ request()->query('search') }}">
                   <div class="input-group-addon">
                     <span class="input-group-text"><i class="ti-search"></i></span>
                   </div>
@@ -116,22 +118,6 @@
                 </a>
 
                 <hr> -->
-
-                <h6 class="sidebar-title">Tags</h6>
-                <div class="gap-multiline-items-1">
-                    @foreach($tags as $tag)
-                        <a class="badge badge-secondary" href="#">
-                            {{ $tag->name }}
-                        </a>
-                    @endforeach
-                </div>
-
-                <hr>
-
-                <h6 class="sidebar-title">About</h6>
-                <p class="small-3">TheSaaS is a responsive, professional, and multipurpose SaaS, Software, Startup and WebApp landing template powered by Bootstrap 4. TheSaaS is a powerful and super flexible tool for any kind of landing pages.</p>
-
-
               </div>
             </div>
 

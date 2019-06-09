@@ -29,8 +29,10 @@
         <div class="navbar-left">
           <button class="navbar-toggler" type="button">&#9776;</button>
           <a class="navbar-brand" href="{{ route('welcome') }}">
-            <img class="logo-dark" src="{{ asset('img/logo-dark.png') }}" alt="logo">
-            <img class="logo-light" src="{{ asset('img/logo-light.png') }}" alt="logo">
+            <!-- <img class="logo-dark" src="{{ asset('img/logo-dark.png') }}" alt="logo"> -->
+            <!-- <img class="logo-light" src="{{ asset('img/logo-light.png') }}" alt="logo"> -->
+            <h5 class="logo-light" style="{{ 'font-weight:200px' }}">Z-Reader</h5>
+            <h5 class="logo-dark" style="{{ 'font-weight:200px'}}">Z-Reader</h5>
           </a>
         </div>
 
@@ -59,12 +61,14 @@
 
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" style="background: #efedef;">
       <div class="container">
         <div class="row gap-y align-items-center">
 
           <div class="col-6 col-lg-3">
-            <a href="/"><img src="{{ asset('img/logo-dark.png') }}" alt="logo"></a>
+            <a href={{ route('welcome') }}">
+                <h5 class="logo-dark" style="{{ 'font-weight:200px'}}">Z-Reader</h5>
+            </a>
           </div>
 
           <div class="col-6 col-lg-3 text-right order-lg-last">
