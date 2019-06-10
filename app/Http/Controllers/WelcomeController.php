@@ -11,16 +11,9 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $search = request()->query('search');
-
-        if($search) {
-            $posts = Post::orderBy('created_at', 'desc')->where('title', 'LIKE', "%{$search}%")                                                     ->paginate(6);
-        } else {
-            $posts = Post::orderBy('created_at', 'desc')->paginate(6);
-        }
 
         return view('welcome')->with('categories', Category::all())
                              ->with('tags', Tag::all())
-                             ->with('posts', $posts);
+                             ->with('posts', Post::searched()->orderBy('created_at', 'desc')->paginate(6));
     }
 }

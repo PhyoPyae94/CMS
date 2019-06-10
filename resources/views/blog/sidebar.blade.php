@@ -5,7 +5,7 @@
                 <form class="input-group" action="{{ route('welcome') }}" method="GET">
                   <input type="text" class="form-control" name="search" placeholder="Search" value="{{ request()->query('search') }}">
                   <div class="input-group-addon">
-                    <span class="input-group-text"><i class="ti-search"></i></span>
+                    <span class="input-group-text"><button type="submit" class="form-control"><i class="ti-search"></i></button>
                   </div>
                 </form>
 

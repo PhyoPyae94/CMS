@@ -41,7 +41,7 @@
                     </a>
                     <div class="p-6 text-center">
                         <p>
-                            <a class="small-5 text-lighter text-uppercase ls-2 fw-400" href="#">
+                            <a class="small-5 text-lighter text-uppercase ls-2 fw-400" href="{{ route('blog.category', $post->category->id)}}">
                                 {{ $post->category->name }}
                             </a>
                         </p>
@@ -69,7 +69,7 @@
             </div>
             
             @include('blog.sidebar')
-            
+
           </div>
         </div>
       </div>

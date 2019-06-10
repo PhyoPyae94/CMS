@@ -15,17 +15,21 @@ class PostsController extends Controller
     {
         return view('blog.show')->with('post', $post);
     }
+
+
     public function category(Category $category)
     {
+       
         return view('blog.category')->with('category', $category)
-                                    ->with('posts', $category->posts()->orderBy('created_at', 'desc')->paginate(6))
+                                    ->with('posts', $category->posts()->searched()->orderBy('created_at', 'desc')->paginate(6))
                                     ->with('categories', Category::all())
                                     ->with('tags', Tag::all());
     }
+
     public function tag(Tag $tag)
     {
         return view('blog.tag')->with('tag', $tag)
-                               ->with('posts', $tag->posts()->orderBy('created_at', 'desc')
+                               ->with('posts', $tag->posts()->searched()->orderBy('created_at', 'desc')
                                ->paginate(6))
                                ->with('categories', Category::all())
                                ->with('tags', Tag::all());

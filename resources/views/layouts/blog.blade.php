@@ -47,7 +47,7 @@
           </ul>
         </section>
 
-        <a class="btn btn-xs btn-round btn-success" href="{{ route('login') }}">Login</a>
+        <a class="btn btn-xs btn-round btn-info" href="{{ route('login') }}">Login</a>
 
       </div>
     </nav><!-- /.navbar -->
@@ -91,6 +91,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/page.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5cfe16e239d234da"></script>
 
   </body>
 </html>
