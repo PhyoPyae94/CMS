@@ -6,11 +6,28 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Blog\PostsController;
 use App\Post;
+use App\Category;
+use App\Tag;
 
 class PostsController extends Controller
 {
     public function show(Post $post)
     {
         return view('blog.show')->with('post', $post);
+    }
+    public function category(Category $category)
+    {
+        return view('blog.category')->with('category', $category)
+                                    ->with('posts', $category->posts()->orderBy('created_at', 'desc')->paginate(6))
+                                    ->with('categories', Category::all())
+                                    ->with('tags', Tag::all());
+    }
+    public function tag(Tag $tag)
+    {
+        return view('blog.tag')->with('tag', $tag)
+                               ->with('posts', $tag->posts()->orderBy('created_at', 'desc')
+                               ->paginate(6))
+                               ->with('categories', Category::all())
+                               ->with('tags', Tag::all());
     }
 }
